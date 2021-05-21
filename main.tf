@@ -25,6 +25,7 @@ resource "google_compute_instance" "vm_instance" {
   machine_type = "f1-micro"
   tags = ["web","dev","small"]
 
+
   boot_disk {
     initialize_params {
       image = "cos-cloud/cos-stable"
