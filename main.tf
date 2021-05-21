@@ -28,7 +28,7 @@ resource "google_compute_instance" "vm_instance" {
 
   boot_disk {
     initialize_params {
-      image = "rhel-7/rhel-7-v20210512"
+      image = "debian-cloud/debian-9"
     }
   }
 
