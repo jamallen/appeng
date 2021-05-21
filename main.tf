@@ -32,6 +32,9 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 
+  metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y && echo '<!doctype html><html><body><h1>Hello from Terraform on Google Cloud!</h1></body></html>' | sudo tee /var/www/html/index.html"
+
+
   network_interface {
     network = google_compute_network.vpc_network.name
     access_config {
@@ -41,11 +44,12 @@ resource "google_compute_instance" "vm_instance" {
 }
 resource "google_compute_firewall" "allow_http" {
   name    = "allow-http-rule"
-  network = "default"
+  network = google_compute_network.vpc_network.name
   allow {
     ports    = ["80"]
     protocol = "tcp"
   }
+  source_ranges = ["0.0.0.0/0"]
   target_tags = ["http-server"]
   priority    = 1000
 
