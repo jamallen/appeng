@@ -28,7 +28,7 @@ resource "google_compute_instance" "vm_instance" {
 
   boot_disk {
     initialize_params {
-      image = "cos-cloud/cos-stable"
+      image = "rhel-7/rhel-7-v20210512"
     }
   }
 
