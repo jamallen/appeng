@@ -23,7 +23,7 @@ resource "google_compute_instance" "vm_instance" {
   count = var.instance_count
   name         = "terraform-instance${count.index}"
   machine_type = "f1-micro"
-  tags = ["web","dev","small"]
+  tags = ["http-server","web","dev","small"]
 
 
   boot_disk {
@@ -38,6 +38,17 @@ resource "google_compute_instance" "vm_instance" {
         nat_ip = google_compute_address.vm_static_ip[count.index].address
     }
   }
+}
+resource "google_compute_firewall" "allow_http" {
+  name    = "allow-http-rule"
+  network = "default"
+  allow {
+    ports    = ["80"]
+    protocol = "tcp"
+  }
+  target_tags = ["http-server"]
+  priority    = 1000
+
 }
 resource "google_compute_address" "vm_static_ip" {
   count = var.instance_count
