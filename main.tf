@@ -24,7 +24,7 @@ resource "google_compute_instance" "vm_instance" {
   name         = "terraform-instance${count.index}"
   machine_type = "f1-micro"
   tags = ["http-server","web","dev","small"]
-  metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y && echo '<!doctype html><html><body><h1>Hello from ${google_compute_instance.vm_instance.name} Terraform on Google Cloud!</h1></body></html>' | sudo tee /var/www/html/index.html"
+  metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y && echo '<!doctype html><html><body><h1>Hello from ${google_compute_instance.vm_instance[count.index].name} Terraform on Google Cloud!</h1></body></html>' | sudo tee /var/www/html/index.html"
 
 
   boot_disk {
