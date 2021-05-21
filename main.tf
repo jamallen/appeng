@@ -20,7 +20,7 @@ resource "google_compute_network" "vpc_network" {
 }
 
 resource "google_compute_instance" "vm_instance" {
-  count = "3"
+  count = var.instance_count
   name         = "terraform-instance${count.index}"
   machine_type = "f1-micro"
   tags = ["web","dev","small"]
@@ -40,5 +40,6 @@ resource "google_compute_instance" "vm_instance" {
   }
 }
 resource "google_compute_address" "vm_static_ip" {
-  name = "terraform-static-ip"
+  count = var.instance_count
+  name = "terraform-static-ip${count.index}"
 }
