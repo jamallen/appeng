@@ -31,7 +31,7 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 
-  metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y && echo '<!doctype html><html><body><h1>Hello from ${google_compute_instance.vm_instance[count.index].name} Terraform on Google Cloud!</h1></body></html>' | sudo tee /var/www/html/index.html"
+  metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y && echo '<!doctype html><html><body><h1>Hey App Team I Am One Of Your New Machines</h1></body></html>' | sudo tee /var/www/html/index.html"
 
   network_interface {
     network = google_compute_network.vpc_network.name
