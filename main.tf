@@ -16,7 +16,7 @@ provider "google" {
 }
 
 resource "google_compute_network" "vpc_network" {
-  name = "terraform-network"
+  name = "${var.project_name}-terraform-network"
 }
 
 resource "google_compute_instance" "vm_instance" {
@@ -54,5 +54,5 @@ resource "google_compute_firewall" "allow_http" {
 }
 resource "google_compute_address" "vm_static_ip" {
   count = var.instance_count
-  name = "terraform-static-ip${count.index}"
+  name = "${var.project_name}-terraform-static-ip${count.index}"
 }
