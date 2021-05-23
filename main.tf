@@ -21,7 +21,7 @@ resource "google_compute_network" "vpc_network" {
 
 resource "google_compute_instance" "vm_instance" {
   count = var.instance_count
-  name         = "terraform-instance${count.index}"
+  name         = "${var.project_name}-instance${count.index}"
   machine_type = "f1-micro"
   tags = ["http-server","web","dev","small"]
 
