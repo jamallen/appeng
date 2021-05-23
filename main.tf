@@ -9,6 +9,7 @@ terraform {
 
 provider "google" {
 
+
 //  credentials = file("gcpterraform.json") 
   project = "serious-octagon-314208"
   region  = "us-central1"
