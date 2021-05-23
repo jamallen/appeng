@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "google" {
-  
+
   project = "serious-octagon-314208"
   region  = "us-central1"
   zone    = "us-central1-c"
@@ -40,7 +40,7 @@ resource "google_compute_instance" "vm_instance" {
   }
 }
 resource "google_compute_firewall" "allow_http" {
-  name    = "allow-http-rule"
+  name    = "${var.project_name}allow-http-rule"
   network = google_compute_network.vpc_network.name
   allow {
     ports    = ["80"]
