@@ -8,8 +8,6 @@ terraform {
 }
 
 provider "google" {
-
-
   project = "serious-octagon-314208"
   region  = "us-central1"
   zone    = "us-central1-c"
