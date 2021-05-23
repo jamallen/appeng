@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "google" {
-  
+
   project = "serious-octagon-314208"
   region  = "us-central1"
   zone    = "us-central1-c"
@@ -30,7 +30,7 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 
-  metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y && echo '<!doctype html><html><body><h1>Hey App Team I Am One Of Your New Machines</h1></body></html>' | sudo tee /var/www/html/index.html"
+  metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y && echo '<!doctype html><html><body><h1>Hey App Team I Am One Of Your VMs</h1></body></html>' | sudo tee /var/www/html/index.html"
 
   network_interface {
     network = google_compute_network.vpc_network.name
@@ -40,7 +40,7 @@ resource "google_compute_instance" "vm_instance" {
   }
 }
 resource "google_compute_firewall" "allow_http" {
-  name    = "allow-http-rule"
+  name    = "${var.project_name}allow-http-rule"
   network = google_compute_network.vpc_network.name
   allow {
     ports    = ["80"]
